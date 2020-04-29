@@ -1,0 +1,11 @@
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.exe
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.deps.json
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.runtimeconfig.json
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.runtimeconfig.dev.json
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.dll
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\bin\Debug\netcoreapp3.1\StudentInfo.pdb
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\obj\Debug\netcoreapp3.1\StudentInfo.csprojAssemblyReference.cache
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\obj\Debug\netcoreapp3.1\StudentInfo.AssemblyInfoInputs.cache
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\obj\Debug\netcoreapp3.1\StudentInfo.AssemblyInfo.cs
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\obj\Debug\netcoreapp3.1\StudentInfo.dll
+C:\Users\imWUMPUS\source\repos\CSharp_April2020\StudentInfo\StudentInfo\obj\Debug\netcoreapp3.1\StudentInfo.pdb
