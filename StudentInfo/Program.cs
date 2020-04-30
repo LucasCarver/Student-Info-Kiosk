@@ -29,7 +29,7 @@ namespace StudentInfo
                 validInput = false;
                 while (!validInput)
                 {
-                    message = $"Enter student's name or number to retrieve info. (1-{namesList.Count})";
+                    message = $"Enter student's name or number to retrieve info about them. (1-{namesList.Count})";
                     input = PromptUser(message).Trim();
 
                     if (IsInt(input))
@@ -68,7 +68,7 @@ namespace StudentInfo
                     }
                 }
                 Console.WriteLine();
-                exitBool = ExitCondition("Retrieve more info? y/n");
+                exitBool = ExitCondition("Retrieve additional info? y/n");
             }
         }
 
