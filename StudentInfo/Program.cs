@@ -54,7 +54,8 @@ namespace StudentInfo
                 validInput = false;
                 while (!validInput)
                 {
-                    message = $"Which info would you like to retrieve about {name}?\n 1. Favorite food\n 2. Hometown \n 3. Hobby";
+                    message = $"Which info would you like to retrieve about {namesList[index]}?\n 1. food\n 2. hometown \n 3. hobby";
+
                     input = PromptUser(message).Trim();
                     selection = SelectList(input);
                     if (selection != -1)
@@ -64,7 +65,14 @@ namespace StudentInfo
                     }
                     else
                     {
-                        Console.WriteLine("Invalid input. Please try again.");
+                        if (IsInt(input))
+                        {
+                            Console.WriteLine("Invalid input \"{input}\". Accepted values are (1-3)");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input \"{input}\". Accepted values are \"food\" - \"hometown\" - \"hobby\"");
+                        }
                     }
                 }
                 Console.WriteLine();
@@ -124,21 +132,21 @@ namespace StudentInfo
         {
             if (IsInt(input))
             {
-                int storage = ParseInt(input);
-                if (storage > 0 && storage <= 3)
+                int temp = ParseInt(input);
+                if (temp > 0 && temp <= 3)
                 {
-                    return storage;
+                    return temp;
                 }
             }
-            else if (input == "food")
+            else if (input.ToLower() == "food")
             {
                 return 1;
             }
-            else if (input == "hometown")
+            else if (input.ToLower() == "hometown")
             {
                 return 2;
             }
-            else if (input == "hobby")
+            else if (input.ToLower() == "hobby")
             {
                 return 3;
             }
@@ -155,7 +163,7 @@ namespace StudentInfo
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine("Input out of range. Please try again.\n");
+                Console.WriteLine($"Input out of range. Please try again.\n");
                 return false;
             }
         }
