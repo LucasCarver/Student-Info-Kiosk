@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace StudentInfo
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<string> namesList = new List<string>() { "Lucas", "Matthew", "Holly", "David" };
-            List<string> foodsList = new List<string>() { "Fried Rice", "Chicken", "Pasta", "Bread" };
-            List<string> hometownList = new List<string>() { "Detroit, MI", "Cleveland, OH", "Miami, FL", "Houston, TX" };
-            List<string> hobbyList = new List<string>() { "Gaming", "Racing", "Cooking", "Gardening" };
-            List<List<string>> listsList = new List<List<string>>() { namesList, foodsList, hometownList, hobbyList };
+            List<string> namesList = new List<string>() { "Lucas", "Matthew", "Holly", "David", "Jessica" };
+            List<string> foodsList = new List<string>() { "Fried Rice", "Grilled Chicken", "Spaghetti", "Bread", "Pizza" };
+            List<string> hometownList = new List<string>() { "Detroit, MI", "Cleveland, OH", "Miami, FL", "Houston, TX", "New York City, NY" };
+            List<string> hobbyList = new List<string>() { "Gaming", "Racing", "Cooking", "Gardening", "Dancing" };
+            List<string> movieList = new List<string>() { "Mad Max: Fury Road", "RoboCop", "Finding Nemo", "The Shining", "Paul Blart: Mall Cop" };
+            //List<List<string>> listsList = new List<List<string>>() { namesList, foodsList, hometownList, hobbyList };
+            List<List<string>> listsList = new List<List<string>>() { namesList, foodsList, hometownList, hobbyList, movieList };
 
             int index = 0;
             string name = "";
@@ -20,23 +23,29 @@ namespace StudentInfo
             string input = "";
             bool exitBool = false;
             bool validInput;
+            string finalMessage = "";
+            string item = "";
 
             Console.WriteLine("Student Information Kiosk");
-            Console.WriteLine();
 
             while (!exitBool)
             {
+                Console.WriteLine();
                 validInput = false;
                 while (!validInput)
                 {
-                    message = $"Enter student's name or number to retrieve info about them. (1-{namesList.Count})";
+                    message = $"Enter a student's name or number to retrieve info about them. (1-{namesList.Count})";
                     input = PromptUser(message).Trim();
 
                     if (IsInt(input))
                     {
                         index = ParseInt(input);
                         index = index - 1;
-                        validInput = DrawStudentInfo(namesList, index);
+                        validInput = VerifyInput(namesList, index);
+                        if (validInput)
+                        {
+                            name = GetStringFromList(namesList, index);
+                        }
                     }
                     else if (IsInList(input, namesList))
                     {
@@ -45,39 +54,51 @@ namespace StudentInfo
                     }
                     else
                     {
-                        Console.WriteLine($"Invalid entry \"{input}\". Please try again.\n");
+                        Console.WriteLine($"Invalid entry \"{input}\". Please try again.");
                         continue;
                     }
                 }
-
-                Console.WriteLine();
+                name = GetStringFromList(namesList, index);
                 validInput = false;
+
                 while (!validInput)
                 {
-                    message = $"Which info would you like to retrieve about {namesList[index]}?\n 1. food\n 2. hometown \n 3. hobby";
+                    message = "";
+                    message += $"Which info would you like to retrieve about {name}?";
+                    message += $"\n 1. {name}'s favorite food";
+                    message += $"\n 2. {name}'s hometown";
+                    message += $"\n 3. {name}'s hobby";
+                    message += $"\n 4. {name}'s favorite movie";
+                        //$"\n 1. {name}'s favorite food\n 2. {name}'s hometown \n 3. {name}'s hobby \n 4.";
 
                     input = PromptUser(message).Trim();
-                    selection = SelectList(input);
+                    selection = SelectList(listsList, input);
                     if (selection != -1)
                     {
-                        DrawStudentInfo(listsList[selection], index);
+                        VerifyInput(namesList, index);
+                        item = GetStringFromList(listsList[selection], index);
                         validInput = true;
                     }
                     else
                     {
                         if (IsInt(input))
                         {
-                            Console.WriteLine("Invalid input \"{input}\". Accepted values are (1-3)");
+                            Console.WriteLine($"Invalid input \"{input}\". Accepted values are (1-{listsList.Count - 1})");
                         }
                         else
                         {
-                            Console.WriteLine("Invalid input \"{input}\". Accepted values are \"food\" - \"hometown\" - \"hobby\"");
+                            Console.WriteLine($"Please enter a number. Accepted values are (1-{listsList.Count - 1})");
                         }
                     }
                 }
+
+                finalMessage = FinalMessage(name, selection, item);
+                Console.WriteLine(finalMessage);
                 Console.WriteLine();
                 exitBool = ExitCondition("Retrieve additional info? y/n");
             }
+            Console.WriteLine();
+            Console.WriteLine("Thank you for using the Student Information Kiosk");
         }
 
         public static string PromptUser(string prompt)
@@ -128,42 +149,36 @@ namespace StudentInfo
             return -1;
         }
 
-        public static int SelectList(string input)
+        public static int SelectList(List<List<string>> list, string input)
         {
             if (IsInt(input))
             {
                 int temp = ParseInt(input);
-                if (temp > 0 && temp <= 3)
+                if (temp > 0 && temp <= list.Count - 1)
                 {
                     return temp;
                 }
             }
-            else if (input.ToLower() == "food")
-            {
-                return 1;
-            }
-            else if (input.ToLower() == "hometown")
-            {
-                return 2;
-            }
-            else if (input.ToLower() == "hobby")
-            {
-                return 3;
-            }
             return -1;
         }
 
-        public static bool DrawStudentInfo(List<string> list, int index)
+        public static string GetStringFromList(List<string> list, int index)
         {
+            string entry = list[index];
+            return entry;
+        }
+
+        public static bool VerifyInput(List<string> list, int index)
+        {
+            string entry = "";
             try
             {
-                string entry = list[index];
-                Console.WriteLine(entry);
+                entry = list[index];
                 return true;
             }
             catch (ArgumentOutOfRangeException)
             {
-                Console.WriteLine($"Input out of range. Please try again.\n");
+                Console.WriteLine($"Invalid input \"{index+1}\". Accepted values are (1-{list.Count})");
                 return false;
             }
         }
@@ -188,6 +203,29 @@ namespace StudentInfo
                     continue;
                 }
             }
+        }
+
+        public static string FinalMessage(string name, int selection, string item)
+        {
+            string temp = $"{name}'s ";
+            if (selection == 1)
+            {
+                temp += "favorite food";
+            }
+            else if (selection == 2)
+            {
+                temp += "hometown";
+            }
+            else if (selection == 3)
+            {
+                temp += "hobby";
+            }
+            else if (selection == 4)
+            {
+                temp += "favorite movie";
+            }
+            temp += $" is {item}.";
+            return temp;
         }
     }
 }
